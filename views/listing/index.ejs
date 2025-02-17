@@ -1,0 +1,132 @@
+<% layout("/layouts/boilerplate") -%>
+
+<style>
+   
+   
+    #filters
+    {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .filter
+    {
+        text-align: center;
+        margin-right: 2rem;
+        margin-top: 2rem;
+        opacity: 0.7;
+    }
+    .filter:hover{
+        opacity: 1;
+        cursor: pointer;
+    }
+    .filter p{
+        font-size: 0.8rem;
+    }
+    .tax-info
+    {
+        display: none;
+    }
+    .tax-toggle
+    {
+        border: 1px solid;
+        border-radius: 1rem;
+        height: 3rem;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+    }
+    
+</style>
+
+    <div id="filters"  class="collapse navbar-collapse" >
+        <div class="navbar">
+        <div class="filter ">
+            <div><i class="fa-solid fa-fire"></i></div>
+            <p>Trending</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-bed"></i></div>
+            <p>Rooms</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-person-swimming"></i></div>
+            <p>Amazing pools</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-city"></i></div>
+            <p>Top cities</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-tree-city"></i></div>
+            <p>Tree houses</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-kitchen-set"></i></div>
+            <p>Chef-Kitchen</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-house"></i></div>
+            <p>Tiny houses</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-water"></i></div>
+            <p>Lakefront</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-landmark-dome"></i></div>
+            <p>Domes</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-golf-ball-tee"></i></div>
+            <p>Golfing</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-person-skiing"></i></div>
+            <p>Skiing</p>
+        </div>
+        <div class="tax-toggle filter">
+            <div class="form-check-reverse form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+              </div>
+        </div>
+    </div>
+        
+    </div>
+    <br><br>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+            <%for(let listing of allListings)
+             {%>
+                <a href="/listings/<%=listing._id%>" class="listing-link">
+        <div class="listing_card  card col" >
+            <img src="<%=listing.image.url%>" class="card-img-top" style="height: 20rem;">
+            <div class="card-img-overlay"> </div>
+
+            <div class="card-body">
+              <p class="card-text"><b><%=listing.title%></b>
+                 <br>
+               &#36;<%=listing.price.toLocaleString("en-us")%>/night<i class="tax-info"> + 18% GST</i></p>
+               
+            </div>
+        </div>
+        <%}%>
+        </a>
+    </div>
+    <script>
+        let taxSwitch=document.getElementById("flexSwitchCheckDefault");
+        taxSwitch.addEventListener("click",()=>
+    {
+
+        let info_tax =document.getElementsByClassName("tax-info");
+        for(info of info_tax)
+        {
+            if(info.style.display!="inline")
+            info.style.display="inline";
+            else
+            info.style.display="none";
+        }
+    });
+       
+    </script>
+
